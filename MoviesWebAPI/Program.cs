@@ -1,7 +1,11 @@
+using Application.Interfaces;
+using Application.Services;
 using Data.DbContexts;
 using Data.Interfaces;
 using Data.Repositories;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using MoviesWebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +24,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // Services
-
+builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IAuthManager, AuthManager>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 
@@ -34,7 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
+
+app.UseMiddleware<ExceptionsHandler>();
 
 app.Run();

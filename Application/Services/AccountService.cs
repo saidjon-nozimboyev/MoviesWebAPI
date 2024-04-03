@@ -32,7 +32,7 @@ public class AccountService(IUnitOfWork unitOfWork, IAuthManager authManager)
     {
         var user = await _unitOfWork.User.GetByEmailAsync(dto.Email);
 
-        if (user == null)
+        if (user is not null)
         {
             throw new StatusCodeException(HttpStatusCode.AlreadyReported, "User with this email already exists");
         }
