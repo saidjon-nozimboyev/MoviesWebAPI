@@ -7,6 +7,7 @@ using Data.Repositories;
 using Domain.Entities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using MoviesWebAPI.Configurations;
 using MoviesWebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 // Unit of Work
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+//Config
+builder.Services.ConfigureJwtAuthorize(builder.Configuration);
+builder.Services.ConfigureSwaggerAuthorize(builder.Configuration);
 
 // Services
 builder.Services.AddTransient<IAccountService, AccountService>();
