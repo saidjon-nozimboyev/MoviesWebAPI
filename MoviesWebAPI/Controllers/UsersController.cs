@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.UserDTOs;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MoviesWebAPI.Controllers;
@@ -13,8 +14,9 @@ public class UsersController(IUserService userService) : ControllerBase
     {
         return Ok(await _userService.GetByIdAsync(id));
     }
-
     [HttpGet("users")]
+    [Authorize(Roles = "Admin")]
+    
     public async Task<IActionResult> GetAllAsync()
     {
         return Ok(await _userService.GetAllAsync());

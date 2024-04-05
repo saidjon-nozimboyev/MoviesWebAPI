@@ -4,6 +4,7 @@ using Application.DTOs.UserDTOs;
 using Application.Interfaces;
 using Data.Interfaces;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using System.Net;
 
 namespace Application.Services;
