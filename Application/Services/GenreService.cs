@@ -21,7 +21,7 @@ public class GenreService(IUnitOfWork unitOfWork,
         var genre = await _unitOfWork.Genre.GetByNameAsync(dto.Name);
         if (genre != null)
         {
-            throw new StatusCodeException(HttpStatusCode.AlreadyReported, "Janr already exists");
+            throw new StatusCodeException(HttpStatusCode.AlreadyReported, "Genre already exists");
         }
 
         await _unitOfWork.Genre.CreateAsync(dto);
