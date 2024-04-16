@@ -34,6 +34,7 @@ builder.Services.ConfigureSwaggerAuthorize(builder.Configuration);
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<IAuthManager, AuthManager>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
 builder.Services.AddScoped<IValidator<Genre>, GenreValidator>();
 builder.Services.AddScoped<IValidator<Movie>, MovieValidator>();
